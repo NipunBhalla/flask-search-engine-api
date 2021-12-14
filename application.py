@@ -1,19 +1,25 @@
 import main
+import os
 
 from configparser import ConfigParser
 from flask import Flask, request
 from sklearn.metrics.pairwise import cosine_similarity
 
 #reading config
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 config_object = ConfigParser()
-config_object.read("config.ini")
-PATH = config_object["PROD"]["PATH"]
+config_object.read(os.path.join(__location__, "config.ini"))
+PATH = os.path.join(__location__,config_object["PROD"]["PATH"])
 
 # creating a Flask app
-app = Flask(__name__)
+application = app = Flask(__name__)
 
 # Process an load objects in memory outside of API call for faster response time
 df_catalogue, vectorizer, vectorized_catalauge = main.vectorize(PATH)
+
+@app.route('/', methods = ['GET'])
+def home():
+    return "OK", 200
 
 @app.route('/search', methods = ['GET'])
 def text_search(n=10):
@@ -29,4 +35,4 @@ def text_search(n=10):
     return df_catalogue.iloc[df_catalogue['score'].argsort()[-1*(n):][::-1],:].to_json(orient='records')
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)
