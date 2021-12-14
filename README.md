@@ -15,7 +15,7 @@ By default, the API endpoint is "/search"
 The api is deployed on AWS and AWS Elasticmeanstalk deployment configuration is included in the repo. You can upload the git repo to Elastibeanstlak as a Flask application directly.
 
 ## Usage
-The API requires 2 query parameters: 
+The API accepts GET requests and requires 2 query parameters: 
 
 | param |  Description |
 | ------ | ------ |
