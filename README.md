@@ -1,4 +1,4 @@
-# Problem 2 - Document Search Engine
+# Document Search Engine
 
 Flask API which takes a text input and returns the most relevant documents.
 
@@ -10,9 +10,6 @@ cd flask-search-engine-api
 python application.py --port 5000
 ```
 By default, the API endpoint is "/search"
-
-## AWS Deployment
-The api is deployed on AWS and AWS Elasticmeanstalk deployment configuration is included in the repo. You can upload the git repo to Elastibeanstlak as a Flask application directly.
 
 ## Usage
 The API accepts GET requests and requires 2 query parameters: 
